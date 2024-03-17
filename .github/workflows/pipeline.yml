@@ -36,6 +36,9 @@ jobs:
     - name: Package
       run: zip lambda.zip bootstrap
 
+    - name: teste
+      run: echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+
     - name: default deploy
       uses: appleboy/lambda-action@v0.1.9
       with:
