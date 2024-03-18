@@ -20,6 +20,4 @@ sam local invoke
 
 sam deploy --no-confirm-changeset
 
-
-
 excluir tudo : sam delete
