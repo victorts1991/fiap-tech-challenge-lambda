@@ -2,24 +2,40 @@ package main
 
 import (
 	"fmt"
-
+	"encoding/json"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"log"
+	"math/rand"
+	"net/http"
+	"time"
 )
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	var greeting string
-	sourceIP := request.RequestContext.Identity.SourceIP
+var (
+	timeout = time.Millisecond * 5
+)
 
-	if sourceIP == "" {
-		greeting = "Hello, world!\n"
-	} else {
-		greeting = fmt.Sprintf("Hello, %s!\n", sourceIP)
+func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	log.Println("authenticating user2")
+	randNum := rand.Int63()
+
+	mapRes := map[string]int64{"random_number": randNum}
+	body, err := json.Marshal(mapRes)
+	if err != nil {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusInternalServerError,
+			Body:       "coundnt marshal the body",
+		}, err
 	}
 
+
 	return events.APIGatewayProxyResponse{
-		Body:       greeting,
-		StatusCode: 200,
+		StatusCode: http.StatusOK,
+		Headers: map[string]string{
+			"Content-Type":  "application/json",
+			"Authorization": "test-123",
+		},
+		Body: string(body),
 	}, nil
 }
 
