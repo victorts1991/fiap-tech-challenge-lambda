@@ -18,7 +18,7 @@ Resources:
       BuildMethod: go1.x
     Properties:
       CodeUri: authentication/
-      Handler: bootstrap.go
+      Handler: main.go
       Runtime: provided.al2023
       Architectures:
         - x86_64
