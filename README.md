@@ -1,30 +1,5 @@
 # fiap-tech-challenge-lambda
 
-sam init
-1
-1
-n
-5
-1
-n
-n
-n
-authentication
-
-cd authentication/
-
-sam build
-
-sam local invoke
- 
-
-sam deploy --no-confirm-changeset
-
-excluir tudo : sam delete
-
-
-# fiap-tech-challenge-infra-db
-
 ### Tech Challenge 3:
 
 ### Passos para homologação dos professores da Fiap
@@ -50,3 +25,5 @@ Foi utilizada a nuvem da Amazon (AWS) para este tech challenge:
 17. Após isso qualquer commit neste repositório que for para a branch "main", irá subir a Lambda;
 
 //explicar como acessar através da aws
+
+https://d6uuv2oau2.execute-api.us-east-2.amazonaws.com/Prod/login/
