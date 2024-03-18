@@ -18,7 +18,7 @@ func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyRespons
 	log.Println("authenticating user2")
 	randNum := rand.Int63()
 
-	mapRes := map[string]int64{"random_number": randNum}
+	mapRes := map[string]int64{"random_number2": randNum}
 	body, err := json.Marshal(mapRes)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
