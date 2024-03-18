@@ -15,7 +15,7 @@ var (
 )
 
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	log.Println("authenticating user")
+	log.Println("authenticating user2")
 	randNum := rand.Int63()
 
 	mapRes := map[string]int64{"random_number": randNum}
@@ -26,6 +26,7 @@ func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyRespons
 			Body:       "coundnt marshal the body",
 		}, err
 	}
+
 
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
