@@ -17,7 +17,7 @@ var (
 
 
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	var api_url string = "<API_URL>"
+	//var api_url string = "<API_URL>"
 
 	log.Println("authenticating user2 - ")
 	randNum := rand.Int63()
