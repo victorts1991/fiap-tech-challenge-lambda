@@ -25,4 +25,6 @@ Foi utilizada a nuvem da Amazon (AWS) para este tech challenge:
 
 //explicar como acessar através da aws
 
+Caso exclua tudo manualmente, será necessário excluir tudo no menu CloudFormation da AWS
+
 https://d6uuv2oau2.execute-api.us-east-2.amazonaws.com/Prod/login/
