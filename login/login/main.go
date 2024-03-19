@@ -15,7 +15,7 @@ func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyRespons
 	)*/
 
 	//apiUrl = os.Getenv("<API_URL>")
-	var apiUrl = "http://ae9cc1af00cdb488ea524a1da64bf434-730275616.us-east-2.elb.amazonaws.com:3000"
+	var apiUrl = "http://abbd59d01bc3f483b9ae4c513e86bc59-1451928684.us-east-2.elb.amazonaws.com:3000"
 
 	cpf := event.PathParameters["cpf"]
 	if cpf == "" {
