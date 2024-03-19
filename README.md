@@ -30,3 +30,4 @@ Caso exclua tudo manualmente, será necessário excluir tudo no menu CloudFormat
 https://d6uuv2oau2.execute-api.us-east-2.amazonaws.com/Prod/login/
 
 API_URL = http://ae9cc1af00cdb488ea524a1da64bf434-730275616.us-east-2.elb.amazonaws.com:3000
+
