@@ -2,27 +2,36 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"log"
-	"math/rand"
 	"net/http"
-	"time"
+	"os"
 )
-
-var (
-	timeout = time.Millisecond * 5
-)
-
-
 
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	//var api_url string = "<API_URL>"
+	var (
+		apiUrl = os.Getenv("API_URL")
+	)
 
-	log.Println("authenticating user2 - ")
-	randNum := rand.Int63()
+	cpf := event.PathParameters["cpf"]
+	if cpf == "" {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "Cpf invalido",
+		}, nil
+	}
 
-	mapRes := map[string]int64{"random_number - <API_URL>": randNum}
+	res, err := http.Get(fmt.Sprintf("%s/login/%s", apiUrl, cpf))
+	if err != nil {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       err.Error(),
+		}, err
+	}
+	token := res.Header.Get("Authorization")
+
+	mapRes := map[string]string{"token": token}
 	body, err := json.Marshal(mapRes)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
@@ -31,12 +40,11 @@ func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyRespons
 		}, err
 	}
 
-
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
 		Headers: map[string]string{
 			"Content-Type":  "application/json",
-			"Authorization": "test-123",
+			"Authorization": token,
 		},
 		Body: string(body),
 	}, nil
