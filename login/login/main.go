@@ -7,17 +7,32 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"net/http"
 )
+
 //"os"
 
+type LoginBody struct {
+	Cpf    string `json:"cpf"`
+	ApiUrl string `json:"api_url"`
+}
+
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	/*var (
-		apiUrl = os.Getenv("http://ae9cc1af00cdb488ea524a1da64bf434-730275616.us-east-2.elb.amazonaws.com:3000")
-	)*/
+	var login LoginBody
+	err := json.Unmarshal([]byte(event.Body), &login)
+	if err != nil {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "body invalid",
+		}, err
+	}
 
-	//apiUrl = os.Getenv("<API_URL>")
-	var apiUrl = "http://a548cae1a6887466bb314a2cdbb1d67b-253324341.us-east-2.elb.amazonaws.com:3000"
+	if &login == nil {
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "body invalid",
+		}, err
+	}
 
-	cpf := event.PathParameters["cpf"]
+	cpf := login.Cpf
 	if cpf == "" {
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusBadRequest,
@@ -25,7 +40,7 @@ func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyRespons
 		}, nil
 	}
 
-	res, err := http.Get(fmt.Sprintf("%s/login/%s", apiUrl, cpf))
+	res, err := http.Get(fmt.Sprintf("%s/login/%s", login.ApiUrl, cpf))
 	if err != nil {
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusBadRequest,
