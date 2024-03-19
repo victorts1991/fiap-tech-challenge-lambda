@@ -37,8 +37,8 @@ https://github.com/victorts1991/fiap-tech-challenge-api/blob/main/docs/insomnia_
 
 2. Altere os valores das varíaveis de ambiente abaixo, isso é possível abrindo as collections importadas e clicando na roldana ao lado de "Base Environment";
 ```
-// url_base: Plataforma AWS->EC2->Load balancers->Clique no único que está criado->Copie o Nome do DNS concatenando com a porta 3000
-// lambda_url_base: Plataforma AWS->API Gateway->Estágios->Prod->Copie o valor de Invocar URL
+// url_base: Plataforma AWS->EC2->Load balancers->Clique no único que está criado->Copie o Nome do DNS concatenando com a porta 3000 no sufixo e http:// no prefixo
+// lambda_url_base: Plataforma AWS->API Gateway->login->Estágios->Prod->Copie o valor de Invocar URL
 // token: Com as varíaveis acima definadas, chame o endpoint cadastra do grupo cliente->chame o endpoint"Login Lambda" com o cpf cadastrado->Copie o valor do token retornado
 
 // Exemplo de como ficará
