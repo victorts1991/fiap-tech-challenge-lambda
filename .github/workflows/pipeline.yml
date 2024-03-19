@@ -19,7 +19,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
       - run: chmod 777 login/login/main.go   
-      - run: sed -i 's/<API_URL>/${{ secrets.API_URL }}/g' login/login/main.go
+      - run: sed -i 's%<API_URL>%${{ secrets.API_URL }}%g' login/login/main.go
       - run: cd ./login && sam build
       - run: cd ./login && sam deploy --no-confirm-changeset
 
