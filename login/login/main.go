@@ -6,13 +6,16 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"net/http"
-	"os"
 )
+//"os"
 
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	var (
-		apiUrl = os.Getenv("API_URL")
-	)
+	/*var (
+		apiUrl = os.Getenv("http://ae9cc1af00cdb488ea524a1da64bf434-730275616.us-east-2.elb.amazonaws.com:3000")
+	)*/
+
+	//apiUrl = os.Getenv("<API_URL>")
+	var apiUrl = "http://a548cae1a6887466bb314a2cdbb1d67b-253324341.us-east-2.elb.amazonaws.com:3000"
 
 	cpf := event.PathParameters["cpf"]
 	if cpf == "" {
