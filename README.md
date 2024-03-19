@@ -8,7 +8,7 @@ Foi utilizada a nuvem da Amazon (AWS) para este tech challenge:
 
 1. Execute todos os passos que estão no README.md do repositório abaixo para subir a imagem da api no ECR da AWS, o banco de dados no RDS e a api em Kubernetes no EKS:
 ```
-[https://github.com/rhuandantas/fiap-tech-challenge-api](https://github.com/victorts1991/fiap-tech-challenge-infra-k8s)
+https://github.com/victorts1991/fiap-tech-challenge-infra-k8s
 ```
 2. Faça o login na plataforma da AWS;
 3. Acesse IAM->Usuários e crie um novo usuário chamado Github;
@@ -32,7 +32,7 @@ Foi utilizada a nuvem da Amazon (AWS) para este tech challenge:
 
 1. Abra o Insomnia e importe as collections que estão no arquivo:
 ```
-[/docs/insomnia_collection](https://github.com/victorts1991/fiap-tech-challenge-api/blob/main/docs/insomnia_collection.json)
+https://github.com/victorts1991/fiap-tech-challenge-api/blob/main/docs/insomnia_collection.json
 ```
 
 2. Altere os valores das varíaveis de ambiente abaixo, isso é possível abrindo as collections importadas e clicando na roldana ao lado de "Base Environment";
