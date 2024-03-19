@@ -11,7 +11,7 @@ import (
 
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	var (
-		apiUrl = os.Getenv("API_URL")
+		apiUrl = os.Getenv("<API_URL>")
 	)
 
 	cpf := event.PathParameters["cpf"]
