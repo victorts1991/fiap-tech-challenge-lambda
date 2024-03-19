@@ -14,11 +14,15 @@ var (
 	timeout = time.Millisecond * 5
 )
 
+
+
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	log.Println("authenticating user2")
+	//var api_url string = "<API_URL>"
+
+	log.Println("authenticating user2 - ")
 	randNum := rand.Int63()
 
-	mapRes := map[string]int64{"random_number": randNum}
+	mapRes := map[string]int64{"random_number - <API_URL>": randNum}
 	body, err := json.Marshal(mapRes)
 	if err != nil {
 		return events.APIGatewayProxyResponse{

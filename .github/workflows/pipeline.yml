@@ -1,52 +1,25 @@
-name: Docker Image CI
+name: Deploy Lambda
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
- 
-  build:
-
+    
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-            
-    - name: Check out code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - run: chmod 777 login/login/main.go   
+      - run: sed -i 's/<API_URL>/${{ secrets.API_URL }}/g' login/login/main.go
+      - run: cd ./login && sam build
+      - run: cd ./login && sam deploy --no-confirm-changeset
 
-#    - name: SAM
-#      uses: aws-actions/setup-sam@v1
-#
-#    - name: Configure AWS credentials
-#      uses: aws-actions/configure-aws-credentials@v1
-#      with:
-#        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#        aws-region: us-east-1
-
-    - name: Setup Go
-      uses: actions/setup-go@v1
-      with:
-        go-version: "1.21"
-
-    - name: Build
-      run: go build -o bootstrap
-
-    - name: Package
-      run: zip lambda.zip bootstrap
-
-    - name: teste
-      run: echo ${{ secrets.AWS_ACCESS_KEY_ID }}
-
-    - name: default deploy
-      uses: appleboy/lambda-action@v0.1.9
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws_region: us-east-1
-        function_name: authentication
-        zip_file: lambda.zip
-        source: bootstrap
-        memory_size: 128
-        timeout: 10
