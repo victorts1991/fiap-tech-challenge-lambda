@@ -8,7 +8,7 @@ Foi utilizada a nuvem da Amazon (AWS) para este tech challenge:
 
 1. Execute todos os passos que estão no README.md do repositório abaixo para subir a imagem da api no ECR da AWS, o banco de dados no RDS e a api em Kubernetes no EKS:
 ```
-[https://github.com/rhuandantas/fiap-tech-challenge-api](https://github.com/victorts1991/fiap-tech-challenge-infra-k8s)
+https://github.com/victorts1991/fiap-tech-challenge-infra-k8s
 ```
 2. Faça o login na plataforma da AWS;
 3. Acesse IAM->Usuários e crie um novo usuário chamado Github;
@@ -25,20 +25,19 @@ Foi utilizada a nuvem da Amazon (AWS) para este tech challenge:
 14. Copie os valores dos campos "Chave de acesso" e "Chave de acesso secreta";
 15. Na plataforma do Github, acesse o menu "Settings" do projeto, na tela que se abrir, clique no menu Security->Secrets and variables->Actions;
 16. Adicione uma "repository secret" chamada AWS_ACCESS_KEY_ID com o valor copiado de "Chave de acesso", e crie outra "repository secret" chamada AWS_SECRET_ACCESS_KEY com o valor copiado de "Chave de acesso secreta";
-17. Na criação do EKS através do repositório "https://github.com/victorts1991/fiap-tech-challenge-infra-k8s", no final de todo o processo você conseguiu uma url para fazer o teste de prova de vida semelhante a essa: "http://ae9cc1af00cdb488ea524a1da64bf434-730275616.us-east-2.elb.amazonaws.com:3000/liveness", copie o valor dela sem o "/liveness", vá até o arquivo "login/login/main.go" e substitua o valor da varíavel "var apiUrl" pelo valor copiado;
-18. Após isso qualquer commit neste repositório que for para a branch "main", irá subir a Lambda;
+17. Após isso qualquer commit neste repositório que for para a branch "main", irá subir a Lambda;
 
 ### Passos para testar a api
 
 1. Abra o Insomnia e importe as collections que estão no arquivo:
 ```
-[/docs/insomnia_collection](https://github.com/victorts1991/fiap-tech-challenge-api/blob/main/docs/insomnia_collection.json)
+https://github.com/victorts1991/fiap-tech-challenge-api/blob/main/docs/insomnia_collection.json
 ```
 
 2. Altere os valores das varíaveis de ambiente abaixo, isso é possível abrindo as collections importadas e clicando na roldana ao lado de "Base Environment";
 ```
-// url_base: Plataforma AWS->EC2->Load balancers->Clique no único que está criado->Copie o Nome do DNS concatenando com a porta 3000
-// lambda_url_base: Plataforma AWS->API Gateway->Estágios->Prod->Copie o valor de Invocar URL
+// url_base: Plataforma AWS->EC2->Load balancers->Clique no único que está criado->Copie o Nome do DNS concatenando com a porta 3000 no sufixo e http:// no prefixo
+// lambda_url_base: Plataforma AWS->API Gateway->login->Estágios->Prod->Copie o valor de Invocar URL
 // token: Com as varíaveis acima definadas, chame o endpoint cadastra do grupo cliente->chame o endpoint"Login Lambda" com o cpf cadastrado->Copie o valor do token retornado
 
 // Exemplo de como ficará
@@ -49,6 +48,13 @@ Foi utilizada a nuvem da Amazon (AWS) para este tech challenge:
 }
 ```
 
+3. Na criação do EKS através do repositório "https://github.com/victorts1991/fiap-tech-challenge-infra-k8s", no final de todo o processo você conseguiu uma url para fazer o teste de prova de vida semelhante a essa: "http://ae9cc1af00cdb488ea524a1da64bf434-730275616.us-east-2.elb.amazonaws.com:3000/liveness", copie o valor dela sem o "/liveness", e na chamada do endpoint "Login Lambda", coloque o seu valor no parâmetro "api_url", deixando o body semelhante ao abaixo:
+```
+{
+	"cpf": "90973502045",
+	"api_url": "http://a548cae1a6887466bb314a2cdbb1d67b-253324341.us-east-2.elb.amazonaws.com:3000"
+}
+```
 
 
 
