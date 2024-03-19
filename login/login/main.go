@@ -6,8 +6,8 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"net/http"
-	"os"
 )
+//"os"
 
 func handler(event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	/*var (
