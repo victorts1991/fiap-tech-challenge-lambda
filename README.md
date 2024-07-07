@@ -1,6 +1,5 @@
 # fiap-tech-challenge-lambda
 
-
 ### Tech Challenge 4 e 5:
 ### Passos para homologação dos professores da Fiap
 
